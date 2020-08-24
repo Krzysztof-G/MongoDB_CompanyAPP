@@ -64,17 +64,6 @@ describe('Department', () => {
                 name: 'Department #1'
             });
             await department.save();
-            const savedDepartment = await Department.findOne({
-                name: 'Department #1'
-            });
-            expect(savedDepartment).to.not.be.null;
-        });
-
-        it('should insert new document with "insertOne" method', async () => {
-            const department = new Department({
-                name: 'Department #1'
-            });
-            await department.save();
             expect(department.isNew).to.be.false;
         });
 
