@@ -8,6 +8,11 @@
     "test": "mocha \"./{,!(node_modules)/**/}*.test.js\"",
     "test:watch": "onchange \"./**/*.js\" -i -k -- yarn test"
   },
+  "config": {
+    "mongodbMemoryServer": {
+      "version": "latest"
+    }
+  },
   "dependencies": {
     "chai": "4.2.0",
     "cors": "^2.8.5",
