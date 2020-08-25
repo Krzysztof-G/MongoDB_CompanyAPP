@@ -53,17 +53,21 @@ exports.post = async (req, res) => {
 };
 
 exports.putId = async (req, res) => {
-
-    const { name } = req.body;
-
+  const { name } = req.body;
+ 
   try {
-    await Department.updateOne({ _id: req.params.id }, { $set: { name: name }});
-    res.json({ message: 'OK, You changed:' + dep });
-  }
-  catch(err) {
+    let dep = await Department.findById(req.params.id);
+    if (dep) {
+      await Department.updateOne(
+        { _id: req.params.id },
+        { $set: { name: name } }
+      );
+      dep = await Department.findById(req.params.id);
+      res.json({ message: "OK, You changed:" + dep });
+    } else res.status(404).json({ message: "Not found..." });
+  } catch (err) {
     res.status(500).json({ message: err });
   }
-
 };
 
 exports.deletedId = async (req, res) => {
